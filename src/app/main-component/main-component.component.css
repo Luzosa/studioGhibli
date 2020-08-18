@@ -1,0 +1,32 @@
+#Wrapper {
+    height: fit-content;
+    min-height: 100vh;
+    width: 100%;
+    float: left;
+    background-color: gray;
+}
+
+p {
+    margin: 2vh 2vw 0 2vw;
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    float: left;
+    clear: both;
+}
+
+#description {
+    width: 50vw;
+    padding-right: 2vw;
+    float: left;
+    margin-bottom: 2vh;
+}
+
+#filmBox {
+    border: 2px solid black;
+    border-radius: 3vh;
+    float: left;
+    height: fit-content;  
+    margin: 2vh 0 0 20vw;
+    background-color: rgba(255, 255, 255, 0.5);
+}
