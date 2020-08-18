@@ -16,12 +16,13 @@ constructor(private httpClient: HttpClient) {
 }
 
   GetFilms(array: Array<Film>, search: string): void {
-    this.httpClient.get(this.baseUrl + 'films' + search).subscribe((data) => {
+    this.httpClient.get(this.baseUrl + 'films/' + search).subscribe((data) => {
       // Do something with the data
       
       for (let i = 0; i < 20 ; i++) {
         if(search == ""){
             let tempFilms = new Film(
+              data[i].id,
               data[i].title,
               data[i].description,
               data[i].director,
@@ -32,8 +33,9 @@ constructor(private httpClient: HttpClient) {
             array.push(tempFilms);
         }
         else {
-          if (search == data[i].title){
+          if (search == data[i].id){
             let tempFilms = new Film(
+              data[i].id,
               data[i].title,
               data[i].description,
               data[i].director,
@@ -42,8 +44,8 @@ constructor(private httpClient: HttpClient) {
               data[i].rt_score,
             );
             array.push(tempFilms);
-            i = 20
-            }
+            
+          }
         }
       }
     

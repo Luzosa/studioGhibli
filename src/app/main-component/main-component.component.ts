@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 //custom
 import { StudioGhibliService } from './studio-ghibli.service';
 import { Film } from './film';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-main-component',
@@ -13,6 +14,7 @@ import { Film } from './film';
 export class MainComponentComponent implements OnInit {
   films: Array<Film> = Array();
   showFilm: boolean = true;
+  id: string;
   
   constructor(private studioGhibliService: StudioGhibliService){
     studioGhibliService.GetFilms(this.films, "");
@@ -22,18 +24,22 @@ export class MainComponentComponent implements OnInit {
   }
 
   Search(title:string):void{
-    // if(!this.showFilm){
-    //   this.showFilm = true;
-    // } else {
-    //   this.showFilm = false;
-    // }
+    
     
     for (let i = 0; i < this.films.length; i++) {
+      if(this.films[i].title == title){
+        this.id = this.films[i].id;
+        console.log(this.id);
+        
+      }
+    
       this.films.pop();
     }
-    if(this.films == null){
-      this.studioGhibliService.GetFilms(this.films, title); 
-    }
+    
+      this.studioGhibliService.GetFilms(this.films, this.id)
+      console.log(this.films[0].title);
+    
+    
     
 
 
