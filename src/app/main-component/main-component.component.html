@@ -1,14 +1,15 @@
 <div id="Wrapper">
-    <button #search (click)="Search(title.value)">search</button>
-    <input #title placeholder="Search Title">
-    <div *ngIf="showFilm;">
-        <div id="filmBox" *ngFor="let film of films">
+    <form [formGroup]="myForm" (ngSubmit)="search(myForm.value)">
+        <input formControlName="title" placeholder="Search Title">
+        <button type="submit" value="search">search</button>
+        
+    </form>
+        <div id="filmBox" *ngFor="let film of currentFilms">
             <p id="title">Title: {{film.title}}</p>
             <p id="title">Producer: {{film.producer}}</p>
             <p id="title">Director: {{film.director}}</p>
             <p id="title">Release Date: {{film.release_date}}</p>
-            <p id="title">Rt Score: {{film.rt_score}}</p>
+            <p id="title">Rotten Tomatoes Score: {{film.rt_score}}</p>
             <p id="description">Description: <br>{{film.description}}</p>
         </div>
-    </div>
 </div>

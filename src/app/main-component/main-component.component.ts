@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { StudioGhibliService } from './studio-ghibli.service';
 import { Film } from './film';
 import { stringify } from '@angular/compiler/src/util';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { renderFlagCheckIfStmt } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-main-component',
@@ -12,37 +14,61 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./main-component.component.css']
 })
 export class MainComponentComponent implements OnInit {
-  films: Array<Film> = Array();
-  showFilm: boolean = true;
-  id: string;
+  currentFilms: Array<Film> = Array();
+  filmDatabase: Array<Film> = Array();
+  id: Array<string> = Array();
+  myForm: FormGroup;
+
+  constructor(private studioGhibliService: StudioGhibliService, private fb: FormBuilder){
+    studioGhibliService.GetFilms(this.currentFilms);
+    studioGhibliService.GetFilms(this.filmDatabase);
+    
+    
+    
+  }
+
+  ngOnInit(): void {   
+    this.myForm = this.fb.group({
+      title: new FormControl(''),
+     }) 
+
+  }
+
+
   
-  constructor(private studioGhibliService: StudioGhibliService){
-    studioGhibliService.GetFilms(this.films, "");
-  }
-
-  ngOnInit(): void {    
-  }
-
-  Search(title:string):void{
+  search(form: FormGroup){
+    console.log(form['title']);
     
-    
-    for (let i = 0; i < this.films.length; i++) {
-      if(this.films[i].title == title){
-        this.id = this.films[i].id;
-        console.log(this.id);
+    if(form['title'] != ""){
+      let j = 0;
+      for (let i = 0; i < this.filmDatabase.length; i++) {
+        if(this.filmDatabase[i].title.toLowerCase().includes(form['title']) || this.filmDatabase[i].title.includes(form['title'])){
+          this.id[j] = this.filmDatabase[i].id;
+          j++;
+        }
+        console.log(this.filmDatabase[i].title);
         
+
       }
-    
-      this.films.pop();
+      console.log(this.id.length);
+
+      if(this.id[0] != null){
+        this.studioGhibliService.GetFilmsArray(this.currentFilms, this.id);
+        this.studioGhibliService.RemoveItems(this.id);
+        console.log(this.id);
+        j = 0;
+
+      }
     }
-    
-      this.studioGhibliService.GetFilms(this.films, this.id)
-      console.log(this.films[0].title);
-    
-    
-    
+    else {
+      this.studioGhibliService.GetFilms(this.currentFilms);
+    }
 
-
+    
+      
+    
+      
   }
+
 
 }
