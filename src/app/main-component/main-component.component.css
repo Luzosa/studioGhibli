@@ -3,7 +3,8 @@
     min-height: 100vh;
     width: 100%;
     float: left;
-    background-color: gray;
+    /*background:linear-gradient(to right, #005aa7, #a2ab58);*/
+    background-image: linear-gradient( 135deg, #FFF5C3 10%, #9452A5 100%);
 }
 
 p {
@@ -12,7 +13,27 @@ p {
     width: fit-content;
     height: fit-content;
     float: left;
+    text-align: center;
+    width: 50vw;
     clear: both;
+}
+
+#title {
+    font-size: 30px;
+    font-weight: bold;
+    
+}
+
+.innerP {
+    margin: 0;
+    font-weight: normal;
+    font-style: normal;
+    
+}
+
+.bold {
+    font-weight: bold;
+    font-style: italic;
 }
 
 #description {
@@ -28,5 +49,26 @@ p {
     float: left;
     height: fit-content;  
     margin: 2vh 0 0 20vw;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(90deg, rgba(135,75,7,0.8) 0%, rgba(135,75,7,0.5) 10%, rgba(66,61,4,0.5) 25%, rgba(45,55,84,0.5) 49%, rgba(43,9,95,0.5) 75%, rgba(158,10,10,0.5) 90%, rgba(158,10,10,0.8));
+    text-align: center;
 }
+
+form {
+    float: left;
+    clear: both;
+    display: block;
+    margin: 2vh 41vw 2vh 38vw;
+}
+
+button {
+    border-radius: 25px;
+    border: 1px black solid;
+    margin-left: 1vw;
+}
+
+input{
+    padding-left: 1vh;
+    border-radius: 25px;
+    border: 1px solid black;
+}
+
